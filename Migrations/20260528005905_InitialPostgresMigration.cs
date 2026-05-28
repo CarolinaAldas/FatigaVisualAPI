@@ -1,12 +1,13 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace FatigaVisualAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialPostgresMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,12 +16,12 @@ namespace FatigaVisualAPI.Migrations
                 name: "Usuarios",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Correo = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FechaRegistro = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Nombre = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Correo = table.Column<string>(type: "text", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: false),
+                    FechaRegistro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,12 +32,12 @@ namespace FatigaVisualAPI.Migrations
                 name: "ConfigNotif",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IntervaloMinutos = table.Column<int>(type: "int", nullable: false),
-                    Activa = table.Column<bool>(type: "bit", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsuarioId = table.Column<int>(type: "integer", nullable: false),
+                    Tipo = table.Column<string>(type: "text", nullable: false),
+                    IntervaloMinutos = table.Column<int>(type: "integer", nullable: false),
+                    Activa = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,13 +54,13 @@ namespace FatigaVisualAPI.Migrations
                 name: "Estadisticas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PausasCompletadas = table.Column<int>(type: "int", nullable: false),
-                    HorasPantalla = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    RachaDias = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsuarioId = table.Column<int>(type: "integer", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    PausasCompletadas = table.Column<int>(type: "integer", nullable: false),
+                    HorasPantalla = table.Column<decimal>(type: "numeric", nullable: false),
+                    RachaDias = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,13 +77,13 @@ namespace FatigaVisualAPI.Migrations
                 name: "Evaluaciones",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RespuestasJson = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IndiceFatiga = table.Column<int>(type: "int", nullable: false),
-                    Nivel = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UsuarioId = table.Column<int>(type: "integer", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    RespuestasJson = table.Column<string>(type: "text", nullable: false),
+                    IndiceFatiga = table.Column<int>(type: "integer", nullable: false),
+                    Nivel = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,12 +100,12 @@ namespace FatigaVisualAPI.Migrations
                 name: "Recomendaciones",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EvaluacionId = table.Column<int>(type: "int", nullable: false),
-                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Prioridad = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EvaluacionId = table.Column<int>(type: "integer", nullable: false),
+                    Descripcion = table.Column<string>(type: "text", nullable: false),
+                    Tipo = table.Column<string>(type: "text", nullable: false),
+                    Prioridad = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
