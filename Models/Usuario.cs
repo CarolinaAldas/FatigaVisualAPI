@@ -12,10 +12,13 @@ public class Usuario
     [Required, EmailAddress]
     public string Correo { get; set; } = string.Empty;
 
-    public string PasswordHash { get; set; } = string.Empty;
+    public string? PasswordHash { get; set; }
 
-    public DateTime FechaRegistro { get; set; }
-        = DateTime.UtcNow;
+    public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
+
+    public string? GoogleId { get; set; }
+
+    public string? FotoUrl { get; set; }
 
     // Navegación
     public ICollection<Evaluacion> Evaluaciones { get; set; } = [];
