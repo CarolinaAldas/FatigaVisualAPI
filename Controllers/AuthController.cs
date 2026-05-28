@@ -22,11 +22,14 @@ public class AuthController(AppDbContext db, IConfiguration config) : Controller
         {
             // 1 — Verificar el token con Google
             var payload = await GoogleJsonWebSignature.ValidateAsync(
-                request.IdToken,
-                new GoogleJsonWebSignature.ValidationSettings
-                {
-                    Audience = [config["Google:ClientId"]]
-                });
+                 request.IdToken,
+                 new GoogleJsonWebSignature.ValidationSettings
+                 {
+                     Audience = [
+                         config["Google:ClientId"],
+                        config["Google:ClientIdAndroid"]
+                     ]
+                 });
 
             // 2 — Buscar o crear el usuario
             var usuario = await db.Usuarios
